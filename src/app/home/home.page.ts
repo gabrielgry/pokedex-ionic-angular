@@ -11,11 +11,11 @@ import {
   IonRefresherContent,
   IonList,
   IonInfiniteScrollContent,
-  IonInfiniteScroll
+  IonInfiniteScroll, IonGrid, IonRow, IonCol
 } from '@ionic/angular/standalone';
 import { PokemonService } from '../services/pokemon.service';
 import { NamedAPIResource, NamedAPIResourceList } from '../services/interfaces';
-import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item.component';
+import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +23,9 @@ import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
+    IonCol,
+    IonRow,
+    IonGrid,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     CommonModule,
@@ -33,7 +36,7 @@ import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item
     IonRefresher,
     IonRefresherContent,
     IonList,
-    PokemonListItemComponent
+    PokemonCardComponent
   ],
 })
 export class HomePage implements OnInit {

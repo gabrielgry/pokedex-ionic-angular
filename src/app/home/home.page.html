@@ -11,11 +11,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    @for (pokemonResource of pokemonResources; track pokemonResource.name) {
-    <pokemon-list-item [pokemonResource]="pokemonResource"></pokemon-list-item>
-    }
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      @for (pokemonResource of pokemonResources; track pokemonResource.name) {
+      <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="2">
+        <pokemon-card [pokemonResource]="pokemonResource" />
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
   <ion-infinite-scroll (ionInfinite)="getMorePokemonResources($event)">
     <ion-infinite-scroll-content loadingText="Carregando..." />
   </ion-infinite-scroll>

@@ -9,32 +9,32 @@ import {
   IonIcon,
   IonAvatar,
   IonImg,
-  IonButton
+  IonButton, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle
 } from '@ionic/angular/standalone'
-import { chevronForward } from 'ionicons/icons';
+import { heart, heartOutline, star, starOutline } from 'ionicons/icons';
 import { PokemonService } from '../services/pokemon.service';
 import { RouterLink } from '@angular/router';
 import { FavoriteService } from '../services/favorite.service';
 
 @Component({
-  selector: 'pokemon-list-item',
-  templateUrl: './pokemon-list-item.component.html',
-  styleUrls: ['./pokemon-list-item.component.scss'],
+  selector: 'pokemon-card',
+  templateUrl: './pokemon-card.component.html',
+  styleUrls: ['./pokemon-card.component.scss'],
   standalone: true,
   imports: [
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCardContent,
+    IonCardHeader,
+    IonCard,
     IonButton,
     RouterLink,
     IonImg,
-    IonAvatar,
-    IonItem,
-    IonLabel,
-    IonNote,
     IonIcon,
-    PokemonListItemComponent,
     TitleCasePipe
   ]
 })
-export class PokemonListItemComponent implements OnInit {
+export class PokemonCardComponent implements OnInit {
   private pokemonService = inject(PokemonService);
   private favoriteService = inject(FavoriteService);
 
@@ -43,7 +43,7 @@ export class PokemonListItemComponent implements OnInit {
   public pokemon?: Pokemon;
 
   constructor() {
-    addIcons({ chevronForward });
+    addIcons({ heart, heartOutline, star, starOutline });
   }
 
   ngOnInit() {

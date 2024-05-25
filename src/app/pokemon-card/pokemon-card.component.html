@@ -1,0 +1,17 @@
+@if (pokemon) {
+<ion-card button="true" [routerLink]="['/pokemon', pokemon.name]">
+  <ion-card-content>
+    <img [alt]="pokemon.name" [src]="pokemon.sprites.front_default" />
+  </ion-card-content>
+  <ion-card-header>
+    <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+  </ion-card-header>
+  <ion-button (click)="toggleFavorite($event, pokemon)" shape="round" size="normal" fill="clear">
+    @if (isFavorite(pokemon)) {
+    <ion-icon slot="icon-only" name="star" color="warning" />
+    } @else {
+    <ion-icon slot="icon-only" name="star-outline" color="medium" />
+    }
+  </ion-button>
+</ion-card>
+}
