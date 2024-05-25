@@ -1,5 +1,5 @@
 @if (pokemon) {
-<ion-item [detail]="false">
+<ion-item [routerLink]="['/pokemon', pokemon.name ]" [detail]="false">
   <ion-avatar slot="start">
     <ion-img [src]="pokemon.sprites.front_default"></ion-img>
   </ion-avatar>

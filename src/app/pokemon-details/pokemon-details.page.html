@@ -1,0 +1,17 @@
+@if (pokemon) {
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pokemon.name | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <p>{{ pokemon.name | titlecase }}</p>
+  <p>{{ pokemon.base_experience }}</p>
+  <p>{{ pokemon.height }}</p>
+  <p>{{ pokemon.weight }}</p>
+</ion-content>
+}

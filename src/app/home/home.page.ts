@@ -13,7 +13,6 @@ import {
   IonInfiniteScrollContent,
   IonInfiniteScroll
 } from '@ionic/angular/standalone';
-import { MessageComponent } from '../message/message.component';
 import { PokemonService } from '../services/pokemon.service';
 import { NamedAPIResource, NamedAPIResourceList } from '../services/interfaces';
 import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item.component';
@@ -34,7 +33,6 @@ import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item
     IonRefresher,
     IonRefresherContent,
     IonList,
-    MessageComponent,
     PokemonListItemComponent
   ],
 })

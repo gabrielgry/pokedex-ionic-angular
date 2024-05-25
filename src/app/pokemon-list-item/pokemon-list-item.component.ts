@@ -5,13 +5,14 @@ import { addIcons } from 'ionicons';
 import { IonItem, IonLabel, IonNote, IonIcon, IonAvatar, IonImg } from '@ionic/angular/standalone'
 import { chevronForward } from 'ionicons/icons';
 import { PokemonService } from '../services/pokemon.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'pokemon-list-item',
   templateUrl: './pokemon-list-item.component.html',
   styleUrls: ['./pokemon-list-item.component.scss'],
   standalone: true,
-  imports: [IonImg, IonAvatar, IonItem, IonLabel, IonNote, IonIcon, PokemonListItemComponent, TitleCasePipe]
+  imports: [RouterLink, IonImg, IonAvatar, IonItem, IonLabel, IonNote, IonIcon, PokemonListItemComponent, TitleCasePipe]
 })
 export class PokemonListItemComponent implements OnInit {
   private pokemonService = inject(PokemonService);
