@@ -3,11 +3,14 @@
   <ion-avatar slot="start">
     <ion-img [src]="pokemon.sprites.front_default"></ion-img>
   </ion-avatar>
-  <ion-label class="ion-text-wrap">
+  <ion-label>
     <h2>
       {{ pokemon.name | titlecase }}
     </h2>
   </ion-label>
+  <ion-button slot="end" (click)="toggleFavorite($event, pokemon)">
+    {{ isFavorite(pokemon) ? 'Desfavoritar' : 'Favoritar' }}
+  </ion-button>
 </ion-item>
 } @else {
 <span>Loading...</span>
