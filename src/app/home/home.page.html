@@ -1,26 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Pokédex
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        Pokédex
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  @if (isLoading) {
+  <div class="loading">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+  } @else if (hasError) {
+  <div class="error">
+    <ion-text class="error-icon" color="warning">
+      <ion-icon name="warning"></ion-icon>
+    </ion-text>
+    <ion-text color="medium">
+      <span>Something went wrong.</span>
+    </ion-text>
+  </div>
+  } @else if (resourceList) {
   <ion-grid>
     <ion-row>
-      @for (pokemonResource of pokemonResources; track pokemonResource.name) {
+      @for (resource of resourceList.results; track resource.name) {
       <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="2">
-        <pokemon-card [pokemonResource]="pokemonResource" />
+        <pokemon-card [pokemonResource]="resource" />
       </ion-col>
       }
     </ion-row>
   </ion-grid>
-  <ion-infinite-scroll (ionInfinite)="getMorePokemonResources($event)">
-    <ion-infinite-scroll-content loadingText="Carregando..." />
-  </ion-infinite-scroll>
+
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="resourceList.count"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    hidePageSize="true"
+    showFirstLastButtons="true"
+    >
+  </mat-paginator>
+  }
 </ion-content>

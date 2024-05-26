@@ -1,7 +1,9 @@
+type Nullable<T> = T | null;
+
 export interface NamedAPIResourceList {
     count: number,
-    next: string | null,
-    previous: string | null,
+    next: Nullable<string>,
+    previous: Nullable<string>,
     results: NamedAPIResource[]
 }
 
@@ -31,12 +33,22 @@ export interface Pokemon {
 }
 
 export interface PokemonSprites {
-    front_default: string;
-    front_shiny: string;
-    front_female: string;
-    front_shiny_female: string;
-    back_default: string;
-    back_shiny: string;
-    back_female: string;
-    back_shiny_female: string;
+    front_default: Nullable<string>;
+    front_shiny: Nullable<string>;
+    front_female: Nullable<string>;
+    front_shiny_female: Nullable<string>;
+    back_default: Nullable<string>;
+    back_shiny: Nullable<string>;
+    back_female: Nullable<string>;
+    back_shiny_female: Nullable<string>;
+    other: PokemonOtherSprites
 }
+
+export interface PokemonOtherSprites {
+    "official-artwork": PokemonOfficialArtwork
+}
+
+export interface PokemonOfficialArtwork {
+    front_default: Nullable<string>
+    front_shiny: Nullable<string>
+} 

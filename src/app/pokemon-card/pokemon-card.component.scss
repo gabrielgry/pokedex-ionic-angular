@@ -10,12 +10,15 @@ ion-card-content {
     padding-bottom: 0;
 }
 
-img {
+ion-img,
+.img-skeleton {
     height: 96px;
     width: 96px;
 }
 
 ion-card-title {
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 

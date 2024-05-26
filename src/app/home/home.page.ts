@@ -1,21 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import {
-  RefresherCustomEvent,
-  InfiniteScrollCustomEvent,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
-  IonRefresher,
-  IonRefresherContent,
-  IonList,
-  IonInfiniteScrollContent,
-  IonInfiniteScroll, IonGrid, IonRow, IonCol
+  IonRow,
+  IonGrid,
+  IonCol,
+  IonSpinner, IonIcon, IonText, IonRefresher, IonRefresherContent, RefresherCustomEvent
 } from '@ionic/angular/standalone';
+import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 import { PokemonService } from '../services/pokemon.service';
-import { NamedAPIResource, NamedAPIResourceList } from '../services/interfaces';
+import { NamedAPIResourceList } from '../services/interfaces';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
+import { addIcons } from 'ionicons';
+import { warning } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -23,48 +23,68 @@ import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
+    IonRefresherContent,
+    IonRefresher,
+    IonText,
+    IonIcon,
+    IonSpinner,
     IonCol,
-    IonRow,
     IonGrid,
-    IonInfiniteScroll,
-    IonInfiniteScrollContent,
+    IonRow,
     CommonModule,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonRefresher,
-    IonRefresherContent,
-    IonList,
-    PokemonCardComponent
-  ],
+    PokemonCardComponent,
+    MatPaginatorModule
+  ]
 })
 export class HomePage implements OnInit {
   private pokemonService = inject(PokemonService);
+  public resourceList?: NamedAPIResourceList;
+  public pageSize = 48;
+  public pageIndex = 0;
 
-  private nextPageUrl: string | null = null
-  public pokemonResources: NamedAPIResource[] = []
+  public isLoading = false;
+  public hasError = false;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    addIcons({ warning });
     this.getPokemonResources();
   }
 
-  getPokemonResources() {
-    this.pokemonService.getPokemonResourceList().subscribe((resourceListResponse) => {
-      this.nextPageUrl = resourceListResponse.next;
-      this.pokemonResources.push(...resourceListResponse.results);
-    })
+  handlePageEvent(event: PageEvent) {
+    console.log({ event })
+    this.getPokemonResources(event.pageIndex);
   }
 
-  getMorePokemonResources(event: InfiniteScrollCustomEvent) {
-    if (!this.nextPageUrl) return;
+  handleRefresh(event: RefresherCustomEvent) {
+    this.getPokemonResources(0, event.detail.complete, event.detail.complete);
+  }
 
-    this.pokemonService.getPokemonResourceListFromUrl(this.nextPageUrl).subscribe((resourceListResponse) => {
-      this.nextPageUrl = resourceListResponse.next;
-      this.pokemonResources.push(...resourceListResponse.results);
-      event.target.complete();
+  getPokemonResources(
+    pageIndex = 0,
+    onSucess: CallableFunction | null = null,
+    onError: CallableFunction | null = null
+  ) {
+    this.isLoading = true;
+    this.pageIndex = pageIndex;
+    const offset = this.pageSize * pageIndex;
+    this.pokemonService.getPokemonResourceList(offset, this.pageSize).subscribe({
+      next: (newResourceList) => {
+        this.resourceList = { ...newResourceList };
+        this.isLoading = false
+        this.hasError = false
+        onSucess?.();
+      },
+      error: () => {
+        this.isLoading = false;
+        this.hasError = true;
+        onError?.();
+      }
     })
   }
 }

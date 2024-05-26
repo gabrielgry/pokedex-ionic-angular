@@ -1,20 +1,22 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { NamedAPIResource, Pokemon } from '../services/interfaces';
-import { TitleCasePipe } from '@angular/common'
 import { addIcons } from 'ionicons';
 import {
-  IonItem,
-  IonLabel,
-  IonNote,
   IonIcon,
-  IonAvatar,
   IonImg,
-  IonButton, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonSkeletonText
 } from '@ionic/angular/standalone'
 import { heart, heartOutline, star, starOutline } from 'ionicons/icons';
 import { PokemonService } from '../services/pokemon.service';
 import { RouterLink } from '@angular/router';
 import { FavoriteService } from '../services/favorite.service';
+import { NameFormatterPipe } from '../pipes/name-formatter.pipe';
 
 @Component({
   selector: 'pokemon-card',
@@ -22,6 +24,7 @@ import { FavoriteService } from '../services/favorite.service';
   styleUrls: ['./pokemon-card.component.scss'],
   standalone: true,
   imports: [
+    IonSkeletonText,
     IonCardSubtitle,
     IonCardTitle,
     IonCardContent,
@@ -31,7 +34,7 @@ import { FavoriteService } from '../services/favorite.service';
     RouterLink,
     IonImg,
     IonIcon,
-    TitleCasePipe
+    NameFormatterPipe
   ]
 })
 export class PokemonCardComponent implements OnInit {
@@ -41,6 +44,8 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemonResource!: NamedAPIResource;
 
   public pokemon?: Pokemon;
+  public isLoading = false;
+  public hasError = false;
 
   constructor() {
     addIcons({ heart, heartOutline, star, starOutline });
@@ -51,10 +56,19 @@ export class PokemonCardComponent implements OnInit {
   }
 
   getPokemon() {
+    this.isLoading = true;
     this.pokemonService
       .getPokemonByName(this.pokemonResource.name)
-      .subscribe((pokemonResutl) => {
-        this.pokemon = pokemonResutl;
+      .subscribe({
+        next: (pokemonResutl) => {
+          this.pokemon = pokemonResutl;
+          this.isLoading = false;
+          this.hasError = false;
+        },
+        error: () => {
+          this.isLoading = false;
+          this.hasError = true;
+        }
       })
   }
 
