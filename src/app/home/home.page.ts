@@ -57,7 +57,6 @@ export class HomePage implements OnInit {
   }
 
   handlePageEvent(event: PageEvent) {
-    console.log({ event })
     this.getPokemonResources(event.pageIndex);
   }
 
