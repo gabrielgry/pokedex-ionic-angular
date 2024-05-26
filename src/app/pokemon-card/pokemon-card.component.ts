@@ -65,9 +65,10 @@ export class PokemonCardComponent implements OnInit {
           this.isLoading = false;
           this.hasError = false;
         },
-        error: () => {
+        error: (err) => {
           this.isLoading = false;
           this.hasError = true;
+          console.log(err);
         }
       })
   }

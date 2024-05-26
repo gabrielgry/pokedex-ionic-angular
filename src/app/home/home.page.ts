@@ -79,9 +79,10 @@ export class HomePage implements OnInit {
         this.hasError = false
         onSucess?.();
       },
-      error: () => {
+      error: (err) => {
         this.isLoading = false;
         this.hasError = true;
+        console.log(err);
         onError?.();
       }
     })
