@@ -9,8 +9,8 @@ describe('ErrorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [ErrorComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ErrorComponent);

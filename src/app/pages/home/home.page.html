@@ -4,24 +4,29 @@
   </ion-refresher>
 
   @if (isLoading) {
-  <loading />
+  <app-loading />
   } @else if (hasError) {
-  <error />
+  <app-error />
   } @else if (resourceList) {
   <ion-grid>
     <ion-row>
       @for (resource of resourceList.results; track resource.name) {
       <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="2">
-        <pokemon-card [pokemonName]="resource.name" />
+        <app-pokemon-card [pokemonName]="resource.name" />
       </ion-col>
       }
     </ion-row>
   </ion-grid>
 
   @if (resourceList.count >= pageSize ) {
-  <mat-paginator (page)="handlePageEvent($event)" [length]="resourceList.count" [pageSize]="pageSize"
-    [pageIndex]="pageIndex" hidePageSize="true" showFirstLastButtons="true">
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="resourceList.count"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    hidePageSize="true"
+    showFirstLastButtons="true"
+  >
   </mat-paginator>
-  }
-  }
+  } }
 </ion-content>

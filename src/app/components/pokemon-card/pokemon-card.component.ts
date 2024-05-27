@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { NamedAPIResource, Pokemon } from '../../services/interfaces';
+import { NamedAPIResource, Pokemon } from 'src/app/services/interfaces';
 import { addIcons } from 'ionicons';
 import {
   IonIcon,
@@ -9,16 +9,16 @@ import {
   IonCardContent,
   IonCardTitle,
   IonCardSubtitle,
-  IonSkeletonText
-} from '@ionic/angular/standalone'
+  IonSkeletonText,
+} from '@ionic/angular/standalone';
 import { heart, heartOutline, star, starOutline } from 'ionicons/icons';
-import { PokemonService } from '../../services/pokemon.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 import { RouterLink } from '@angular/router';
-import { FavoriteService } from '../../services/favorite.service';
-import { NameFormatterPipe } from '../../pipes/name-formatter.pipe';
+import { FavoriteService } from 'src/app/services/favorite.service';
+import { NameFormatterPipe } from 'src/app/pipes/name-formatter.pipe';
 
 @Component({
-  selector: 'pokemon-card',
+  selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.scss'],
   standalone: true,
@@ -32,8 +32,8 @@ import { NameFormatterPipe } from '../../pipes/name-formatter.pipe';
     IonButton,
     RouterLink,
     IonIcon,
-    NameFormatterPipe
-  ]
+    NameFormatterPipe,
+  ],
 })
 export class PokemonCardComponent implements OnInit {
   private pokemonService = inject(PokemonService);
@@ -53,30 +53,28 @@ export class PokemonCardComponent implements OnInit {
     this.getPokemon();
   }
 
-  getPokemon() {
-    this.isLoading = true;
-    this.pokemonService
-      .getPokemonByName(this.pokemonName)
-      .subscribe({
-        next: (pokemonResutl) => {
-          this.pokemon = pokemonResutl;
-          this.isLoading = false;
-          this.hasError = false;
-        },
-        error: (err) => {
-          this.isLoading = false;
-          this.hasError = true;
-          console.log(err);
-        }
-      })
-  }
-
   isFavorite(pokemon: Pokemon): boolean {
     return this.favoriteService.isFavorite(pokemon.name);
   }
 
-  toggleFavorite(event: MouseEvent, pokemon: Pokemon) {
+  toggleFavorite(event: MouseEvent, pokemon: Pokemon): Promise<void> {
     event.stopPropagation();
     return this.favoriteService.toggleFavorite(pokemon.name);
+  }
+
+  private getPokemon(): void {
+    this.isLoading = true;
+    this.pokemonService.getPokemonByName(this.pokemonName).subscribe({
+      next: (pokemonResutl) => {
+        this.pokemon = pokemonResutl;
+        this.isLoading = false;
+        this.hasError = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.hasError = true;
+        console.log(err);
+      },
+    });
   }
 }

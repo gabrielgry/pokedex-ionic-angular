@@ -1,15 +1,15 @@
 type Nullable<T> = T | null;
 
 export interface NamedAPIResourceList {
-  count: number,
-  next: Nullable<string>,
-  previous: Nullable<string>,
-  results: NamedAPIResource[]
+  count: number;
+  next: Nullable<string>;
+  previous: Nullable<string>;
+  results: NamedAPIResource[];
 }
 
 export interface NamedAPIResource {
-  name: string,
-  url: string,
+  name: string;
+  url: string;
 }
 
 export interface Pokemon {
@@ -35,16 +35,16 @@ export interface PokemonSprites {
   back_shiny: Nullable<string>;
   back_female: Nullable<string>;
   back_shiny_female: Nullable<string>;
-  other: PokemonOtherSprites
+  other: PokemonOtherSprites;
 }
 
 export interface PokemonOtherSprites {
-  "official-artwork": PokemonOfficialArtwork
+  'official-artwork': PokemonOfficialArtwork;
 }
 
 export interface PokemonOfficialArtwork {
-  front_default: Nullable<string>
-  front_shiny: Nullable<string>
+  front_default: Nullable<string>;
+  front_shiny: Nullable<string>;
 }
 
 export interface PokemonStat {

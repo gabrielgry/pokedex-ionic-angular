@@ -8,14 +8,19 @@ import {
   IonRow,
   IonGrid,
   IonCol,
-  IonSpinner, IonIcon, IonText, IonRefresher, IonRefresherContent, RefresherCustomEvent
+  IonSpinner,
+  IonIcon,
+  IonText,
+  IonRefresher,
+  IonRefresherContent,
+  RefresherCustomEvent,
 } from '@ionic/angular/standalone';
 import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
-import { PokemonService } from '../../services/pokemon.service';
-import { NamedAPIResourceList } from '../../services/interfaces';
-import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
-import { LoadingComponent } from '../../components/loading/loading.component';
-import { ErrorComponent } from '../../components/error/error.component';
+import { PokemonService } from 'src/app/services/pokemon.service';
+import { NamedAPIResourceList } from 'src/app/services/interfaces';
+import { PokemonCardComponent } from 'src/app/components/pokemon-card/pokemon-card.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { ErrorComponent } from 'src/app/components/error/error.component';
 import { addIcons } from 'ionicons';
 import { warning } from 'ionicons/icons';
 
@@ -41,8 +46,8 @@ import { warning } from 'ionicons/icons';
     PokemonCardComponent,
     LoadingComponent,
     ErrorComponent,
-    MatPaginatorModule
-  ]
+    MatPaginatorModule,
+  ],
 })
 export class HomePage implements OnInit {
   private pokemonService = inject(PokemonService);
@@ -53,42 +58,44 @@ export class HomePage implements OnInit {
   public isLoading = false;
   public hasError = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     addIcons({ warning });
-    this.getPokemonResources();
+    this.loadPokemonResources();
   }
 
   handlePageEvent(event: PageEvent) {
-    this.getPokemonResources(event.pageIndex);
+    this.loadPokemonResources(event.pageIndex);
   }
 
   handleRefresh(event: RefresherCustomEvent) {
-    this.getPokemonResources(0, event.detail.complete, event.detail.complete);
+    this.loadPokemonResources(0, event.detail.complete, event.detail.complete);
   }
 
-  getPokemonResources(
+  private loadPokemonResources(
     pageIndex = 0,
     onSucess: CallableFunction | null = null,
-    onError: CallableFunction | null = null
-  ) {
+    onError: CallableFunction | null = null,
+  ): void {
     this.isLoading = true;
     this.pageIndex = pageIndex;
     const offset = this.pageSize * pageIndex;
-    this.pokemonService.getPokemonResourceList(offset, this.pageSize).subscribe({
-      next: (newResourceList) => {
-        this.resourceList = { ...newResourceList };
-        this.isLoading = false
-        this.hasError = false
-        onSucess?.();
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.hasError = true;
-        console.log(err);
-        onError?.();
-      }
-    })
+    this.pokemonService
+      .getPokemonResourceList(offset, this.pageSize)
+      .subscribe({
+        next: (newResourceList) => {
+          this.resourceList = { ...newResourceList };
+          this.isLoading = false;
+          this.hasError = false;
+          onSucess?.();
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.hasError = true;
+          console.log(err);
+          onError?.();
+        },
+      });
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Storage } from '@ionic/storage-angular'
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoriteService {
   private storage = inject(Storage);
@@ -20,7 +20,7 @@ export class FavoriteService {
     this.loadFavorites();
   }
 
-  private async loadFavorites() {
+  private async loadFavorites(): Promise<void> {
     const favorites = await this._storage?.get(this.key);
     if (favorites) {
       this.favorites = favorites;
@@ -36,7 +36,7 @@ export class FavoriteService {
     return this.favorites;
   }
 
-  async toggleFavorite(name: string) {
+  async toggleFavorite(name: string): Promise<void> {
     if (this.isFavorite(name)) {
       this.favorites.delete(name);
     } else {

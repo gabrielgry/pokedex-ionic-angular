@@ -1,4 +1,4 @@
-import { NameFormatterPipe } from './name-formatter.pipe'
+import { NameFormatterPipe } from './name-formatter.pipe';
 
 describe('NameFormatterPipe', () => {
   it('create an instance', () => {
