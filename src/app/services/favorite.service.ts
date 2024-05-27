@@ -31,6 +31,11 @@ export class FavoriteService {
     return this.favorites.has(name);
   }
 
+  async getFavorites(): Promise<Set<string>> {
+    await this.loadFavorites();
+    return this.favorites;
+  }
+
   async toggleFavorite(name: string) {
     if (this.isFavorite(name)) {
       this.favorites.delete(name);

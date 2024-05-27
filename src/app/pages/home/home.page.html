@@ -1,11 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Pokédex
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -20,14 +12,16 @@
     <ion-row>
       @for (resource of resourceList.results; track resource.name) {
       <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="2">
-        <pokemon-card [pokemonResource]="resource" />
+        <pokemon-card [pokemonName]="resource.name" />
       </ion-col>
       }
     </ion-row>
   </ion-grid>
 
+  @if (resourceList.count >= pageSize ) {
   <mat-paginator (page)="handlePageEvent($event)" [length]="resourceList.count" [pageSize]="pageSize"
     [pageIndex]="pageIndex" hidePageSize="true" showFirstLastButtons="true">
   </mat-paginator>
+  }
   }
 </ion-content>

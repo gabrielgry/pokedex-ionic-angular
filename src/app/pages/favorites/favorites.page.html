@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+  @if (count) {
+  <ion-grid>
+    <ion-row>
+      @for (name of favorites; track name) {
+      <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="2">
+        <pokemon-card [pokemonName]="name" />
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  @if (allFavorites!.size > pageSize) {
+  <mat-paginator (page)="handlePageEvent($event)" [length]="allFavorites!.size" [pageSize]="pageSize"
+    [pageIndex]="pageIndex" hidePageSize="true" showFirstLastButtons="true">
+  </mat-paginator>
+  }
+
+  } @else {
+  <div class="message">
+    <p>Your favorites list is empty. </p>
+  </div>
+  }
+</ion-content>

@@ -41,7 +41,7 @@ export class PokemonCardComponent implements OnInit {
   private pokemonService = inject(PokemonService);
   private favoriteService = inject(FavoriteService);
 
-  @Input() pokemonResource!: NamedAPIResource;
+  @Input() pokemonName!: string;
 
   public pokemon?: Pokemon;
   public isLoading = false;
@@ -58,7 +58,7 @@ export class PokemonCardComponent implements OnInit {
   getPokemon() {
     this.isLoading = true;
     this.pokemonService
-      .getPokemonByName(this.pokemonResource.name)
+      .getPokemonByName(this.pokemonName)
       .subscribe({
         next: (pokemonResutl) => {
           this.pokemon = pokemonResutl;
