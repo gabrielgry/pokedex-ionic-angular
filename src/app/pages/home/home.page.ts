@@ -11,9 +11,11 @@ import {
   IonSpinner, IonIcon, IonText, IonRefresher, IonRefresherContent, RefresherCustomEvent
 } from '@ionic/angular/standalone';
 import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
-import { PokemonService } from '../services/pokemon.service';
-import { NamedAPIResourceList } from '../services/interfaces';
-import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
+import { PokemonService } from '../../services/pokemon.service';
+import { NamedAPIResourceList } from '../../services/interfaces';
+import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
+import { LoadingComponent } from '../../components/loading/loading.component';
+import { ErrorComponent } from '../../components/error/error.component';
 import { addIcons } from 'ionicons';
 import { warning } from 'ionicons/icons';
 
@@ -37,6 +39,8 @@ import { warning } from 'ionicons/icons';
     IonTitle,
     IonContent,
     PokemonCardComponent,
+    LoadingComponent,
+    ErrorComponent,
     MatPaginatorModule
   ]
 })

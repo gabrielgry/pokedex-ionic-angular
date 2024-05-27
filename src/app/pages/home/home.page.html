@@ -12,18 +12,9 @@
   </ion-refresher>
 
   @if (isLoading) {
-  <div class="loading">
-    <ion-spinner name="dots"></ion-spinner>
-  </div>
+  <loading />
   } @else if (hasError) {
-  <div class="error">
-    <ion-text class="error-icon" color="warning">
-      <ion-icon name="warning"></ion-icon>
-    </ion-text>
-    <ion-text color="medium">
-      <span>Something went wrong.</span>
-    </ion-text>
-  </div>
+  <error />
   } @else if (resourceList) {
   <ion-grid>
     <ion-row>
@@ -35,14 +26,8 @@
     </ion-row>
   </ion-grid>
 
-  <mat-paginator
-    (page)="handlePageEvent($event)"
-    [length]="resourceList.count"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    hidePageSize="true"
-    showFirstLastButtons="true"
-    >
+  <mat-paginator (page)="handlePageEvent($event)" [length]="resourceList.count" [pageSize]="pageSize"
+    [pageIndex]="pageIndex" hidePageSize="true" showFirstLastButtons="true">
   </mat-paginator>
   }
 </ion-content>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { NamedAPIResourceList, Pokemon } from './interfaces';
+import { Ability, NamedAPIResourceList, Pokemon } from './interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,5 +23,9 @@ export class PokemonService {
 
     public getPokemonByName(name: string): Observable<Pokemon> {
         return this.http.get<Pokemon>(`${this.baseUrl}/pokemon/${name}`)
+    }
+
+    public getAbility(name: string): Observable<Ability> {
+        return this.http.get<Ability>(`${this.baseUrl}/ability/${name}`)
     }
 }

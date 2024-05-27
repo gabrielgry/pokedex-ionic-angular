@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { NamedAPIResource, Pokemon } from '../services/interfaces';
+import { NamedAPIResource, Pokemon } from '../../services/interfaces';
 import { addIcons } from 'ionicons';
 import {
   IonIcon,
@@ -13,10 +13,10 @@ import {
   IonSkeletonText
 } from '@ionic/angular/standalone'
 import { heart, heartOutline, star, starOutline } from 'ionicons/icons';
-import { PokemonService } from '../services/pokemon.service';
+import { PokemonService } from '../../services/pokemon.service';
 import { RouterLink } from '@angular/router';
-import { FavoriteService } from '../services/favorite.service';
-import { NameFormatterPipe } from '../pipes/name-formatter.pipe';
+import { FavoriteService } from '../../services/favorite.service';
+import { NameFormatterPipe } from '../../pipes/name-formatter.pipe';
 
 @Component({
   selector: 'pokemon-card',
