@@ -3,7 +3,6 @@ import { NamedAPIResource, Pokemon } from '../../services/interfaces';
 import { addIcons } from 'ionicons';
 import {
   IonIcon,
-  IonImg,
   IonButton,
   IonCard,
   IonCardHeader,
@@ -32,7 +31,6 @@ import { NameFormatterPipe } from '../../pipes/name-formatter.pipe';
     IonCard,
     IonButton,
     RouterLink,
-    IonImg,
     IonIcon,
     NameFormatterPipe
   ]

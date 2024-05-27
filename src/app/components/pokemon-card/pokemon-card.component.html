@@ -1,7 +1,7 @@
 @if (pokemon) {
 <ion-card button="true" [routerLink]="['/pokemon', pokemon.name]">
   <ion-card-content>
-    <ion-img [alt]="pokemon.name | nameFormatter"
+    <img [alt]="pokemon.name | nameFormatter"
       [src]="pokemon.sprites.other['official-artwork'].front_default || 'assets/pokeball.svg'" />
   </ion-card-content>
   <ion-card-header>
