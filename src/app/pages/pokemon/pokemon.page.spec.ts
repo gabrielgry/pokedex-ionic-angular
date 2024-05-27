@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PokemonDetailsPage } from './pokemon-details.page';
+import { PokemonDetailsPage } from './pokemon.page';
 
 describe('PokemonDetailsPage', () => {
   let component: PokemonDetailsPage;

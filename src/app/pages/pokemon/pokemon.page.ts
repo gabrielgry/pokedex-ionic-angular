@@ -38,8 +38,8 @@ interface ViewAbility {
 
 @Component({
   selector: 'app-pokemon-details',
-  templateUrl: './pokemon-details.page.html',
-  styleUrls: ['./pokemon-details.page.scss'],
+  templateUrl: './pokemon.page.html',
+  styleUrls: ['./pokemon.page.scss'],
   standalone: true,
   imports: [
     IonText,
