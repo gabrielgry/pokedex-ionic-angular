@@ -31,6 +31,7 @@ jobs:
       - run: npm install -g @ionic/cli
       - run: npm ci
       - run: ionic build --prod
+      - run: cp ./www/index.html ./www/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./www
