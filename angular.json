@@ -24,6 +24,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "baseHref": "https://gabrielgry.github.io/pokedex-ionic-angular/",
+            "deployUrl": "https://gabrielgry.github.io/pokedex-ionic-angular/",
             "assets": [
               {
                 "glob": "**/*",

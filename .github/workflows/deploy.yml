@@ -30,7 +30,7 @@ jobs:
           cache: "npm"
       - run: npm install -g @ionic/cli
       - run: npm ci
-      - run: ionic build --prod --- --base-href "${{ vars.PAGE_URL }}"
+      - run: ionic build --prod
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./www
