@@ -29,6 +29,11 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm install -g @ionic/cli
+      - run: |
+          jq --arg id "${{ vars.PATH_URL}}" \
+          '.projects.app.architect.build.options.baseHref=$id | .projects.app.architect.build.options.deployUrl=$id' \
+          angular.json > angular.tmp.json && \
+          mv angular.tmp.json angular.json
       - run: npm ci
       - run: ionic build --prod
       - run: cp ./www/index.html ./www/404.html
