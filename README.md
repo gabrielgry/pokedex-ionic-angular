@@ -7,6 +7,8 @@
 
 - vídeo:
 
+  https://github.com/gabrielgry/pokedex-ionic-angular/assets/22972590/7149dd90-afee-4b93-9dfe-37459f877dba
+
 
 ## Abordagem
 
