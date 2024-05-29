@@ -37,7 +37,7 @@ interface ViewAbility {
 }
 
 @Component({
-  selector: 'app-pokemon-details',
+  selector: 'app-pokemon',
   templateUrl: './pokemon.page.html',
   styleUrls: ['./pokemon.page.scss'],
   standalone: true,
